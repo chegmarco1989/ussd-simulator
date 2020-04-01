@@ -25,3 +25,8 @@ You can also test your apps in development
 php artisan ussd:simulate http://ussd-app.test/api/ussd 265888800900
 ```
 
+Even running on localhost
+```bash
+php artisan ussd:simulate http://localhost:8000/api/ussd 26588880900
+```
+
