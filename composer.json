@@ -1,0 +1,26 @@
+{
+    "name": "tnmdev/ussd-simulator",
+    "description": "A simulator for TNM USSD applications",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "TNM Developers",
+            "email": "developers@tnm.co.mw"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "TNM\\UssdSimulator\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TNM\\UssdSimulator\\SimulatorServiceProvider"
+            ]
+        }
+    }
+}
