@@ -6,9 +6,19 @@ namespace TNM\UssdSimulator\Http;
 
 class FailedUssdResponse implements UssdResponseInterface
 {
+    /**
+     * @var string
+     */
+    private $message;
+
+    public function __construct(string $message)
+    {
+        $this->message = $message;
+    }
+
     public function render()
     {
-        return "Failed to contact the USSD app";
+        return $this->message;
     }
 
     public function successful(): bool
