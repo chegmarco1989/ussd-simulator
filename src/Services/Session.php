@@ -55,7 +55,7 @@ class Session
             ]);
             return new UssdResponse($response);
         } catch (\Exception $exception) {
-            return new FailedUssdResponse();
+            return new FailedUssdResponse($exception->getMessage());
         }
     }
 
