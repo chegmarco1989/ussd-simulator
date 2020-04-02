@@ -6,7 +6,7 @@ namespace TNM\UssdSimulator\Http;
 
 use Psr\Http\Message\ResponseInterface;
 
-class UssdResponse
+class UssdResponse implements UssdResponseInterface
 {
     /**
      * @var ResponseInterface
@@ -30,7 +30,7 @@ class UssdResponse
         $this->decodeResponse();
     }
 
-    public function decodeResponse()
+    private function decodeResponse()
     {
         $response = json_decode(json_encode(simplexml_load_string($this->response->getBody()->getContents())));
         if(!isset($response->msg) || !isset($response->type)) throw new \Exception("Invalid response");
@@ -42,6 +42,12 @@ class UssdResponse
     public function render()
     {
         return $this->message;
+    }
+
+    public function successful(): bool
+    {
+        if (!$this->response) return false;
+        return $this->response->getStatusCode() >= 200 && $this->response->getStatusCode() <= 300;
     }
 
     public function interactive(): bool

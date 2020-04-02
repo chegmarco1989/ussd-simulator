@@ -5,7 +5,9 @@ namespace TNM\UssdSimulator\Services;
 
 
 use GuzzleHttp\Client;
+use TNM\UssdSimulator\Http\FailedUssdResponse;
 use TNM\UssdSimulator\Http\UssdResponse;
+use TNM\UssdSimulator\Http\UssdResponseInterface;
 
 class Session
 {
@@ -34,17 +36,17 @@ class Session
         $this->http = new Client();
     }
 
-    public function initialize(): ?UssdResponse
+    public function initialize(): UssdResponseInterface
     {
         return $this->send(1,1);
     }
 
-    public function respond(string $message): ?UssdResponse
+    public function respond(string $message): UssdResponseInterface
     {
         return $this->send($message, 2);
     }
 
-    private function send(string $message, int $type): ?UssdResponse
+    private function send(string $message, int $type): UssdResponseInterface
     {
         try {
             $response = $this->http->request("POST", $this->url, [
@@ -53,7 +55,7 @@ class Session
             ]);
             return new UssdResponse($response);
         } catch (\Exception $exception) {
-            return null;
+            return new FailedUssdResponse();
         }
     }
 

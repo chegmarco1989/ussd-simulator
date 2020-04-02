@@ -3,7 +3,7 @@
 namespace TNM\UssdSimulator\Commands;
 
 use Illuminate\Console\Command;
-use TNM\UssdSimulator\Http\UssdResponse;
+use TNM\UssdSimulator\Http\UssdResponseInterface;
 use TNM\UssdSimulator\Services\Session;
 
 class Simulate extends Command
@@ -22,7 +22,7 @@ class Simulate extends Command
      */
     protected $description = 'Simulate a USSD session';
     /**
-     * @var UssdResponse|null
+     * @var UssdResponseInterface
      */
     private $response;
 
@@ -45,11 +45,6 @@ class Simulate extends Command
     {
         $session = new Session($this->argument('url'), $this->argument('phone'), $this->option('id'));
         $this->response = $session->initialize();
-
-        if (!$this->response) {
-            $this->error("Failed to connect to the USSD application");
-            die();
-        }
 
         while ($this->response->interactive()) {
             $input = $this->ask($this->response->render());
