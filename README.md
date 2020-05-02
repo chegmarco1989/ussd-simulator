@@ -1,6 +1,6 @@
 # USSD Simulator
 
-This is a CLI simulator for USSD apps that are built for TNM USSD, or any apps built with the framework <https://github.com/saulchelewani/ussd-adapter>
+This is a Laravel CLI simulator for USSD apps that are built for TNM USSD, or any apps built with the framework <https://github.com/saulchelewani/ussd-adapter>
 
 With this, you can run a USSD app in command-line, whether in development or on live environment.
 
